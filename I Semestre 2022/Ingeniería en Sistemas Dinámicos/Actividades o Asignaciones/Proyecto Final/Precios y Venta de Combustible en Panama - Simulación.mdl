@@ -1,0 +1,273 @@
+{UTF-8}
+Tasa de Especulación de Mercado Gas=
+	RANDOM UNIFORM(0.4, 0.5, 0.45 )
+	~	
+	~		|
+
+Costo Final de Gasolina=
+	((Precio de WTI/12)+Impuesto de Gasolina)*Tasa de Especulación de Mercado Gas
+	~	
+	~		|
+
+Tasa de Especulación de Mercado=
+	RANDOM UNIFORM(0.6, 0.7, 0.65 )
+	~	
+	~		|
+
+Costo Final de Diésel=
+	((Precio de WTI/19)+Impuesto de Diésel)*Tasa de Especulación de Mercado
+	~	
+	~		|
+
+Bahía las Minas=
+	Reserva Nacional Estratégica de Diésel+Reserva Nacional Estratégica de Gasolina
+	~	
+	~		|
+
+Importación de Diésel=
+	(Importación de Texaco Diésel+Importación por Delta Diésel+Importación por Puma Diésel\
+		)*RANDOM UNIFORM(0.25, 0.5 , 0.35 )
+	~	
+	~		|
+
+Importación de Gasolina=
+	(Importación por Delta Gasolina+Importación por Puma Gasolina+Importación por Texaco Gasolina\
+		)*RANDOM UNIFORM( 0.25, 0.5 , 0.35 )
+	~	
+	~		|
+
+Importación de Texaco Diésel=
+	Tasa de Importación de Galones de Diésel*0.2
+	~	
+	~		|
+
+Importación por Delta Diésel=
+	Tasa de Importación de Galones de Diésel*0.4
+	~	
+	~		|
+
+Importación por Delta Gasolina=
+	Tasa de Importación de Galones de Gasolinas*0.4
+	~	
+	~		|
+
+Importación por Puma Diésel=
+	Tasa de Importación de Galones de Diésel*0.4
+	~	
+	~		|
+
+Importación por Puma Gasolina=
+	Tasa de Importación de Galones de Gasolinas*0.4
+	~	
+	~		|
+
+Importación por Texaco Gasolina=
+	Tasa de Importación de Galones de Gasolinas*0.2
+	~	
+	~		|
+
+Impuesto de Diésel=
+	0.25
+	~	
+	~		|
+
+Impuesto de Gasolina=
+	0.6
+	~	
+	~		|
+
+Isla la Boca=
+	Reserva Nacional Estratégica de Diésel+Reserva Nacional Estratégica de Gasolina
+	~	
+	~		|
+
+Isla Pencas=
+	Reserva Nacional Estratégica de Diésel+Reserva Nacional Estratégica de Gasolina
+	~	
+	~		|
+
+Precio de WTI=
+	RANDOM UNIFORM( 100, 140 , 125)
+	~	
+	~		|
+
+Reserva Nacional Estratégica de Diésel= INTEG (
+	Importación de Diésel-Venta de Diésel,
+		RANDOM UNIFORM( 0.4, 0.8 , 0.6 )*350000)
+	~	
+	~		|
+
+Reserva Nacional Estratégica de Gasolina= INTEG (
+	Importación de Gasolina-Venta de Gasolina,
+		 RANDOM UNIFORM( 0.4, 0.8 , 0.6 )*300000
+		)
+	~	
+	~		|
+
+Tasa de Importación de Galones de Diésel=
+	(RANDOM UNIFORM( 200 , 250 , 150 ))*1000
+	~	
+	~		|
+
+Tasa de Importación de Galones de Gasolinas=
+	(RANDOM UNIFORM( 175 , 240 , 200 ))*1000
+	~	
+	~		|
+
+Venta de Diésel=
+	IF THEN ELSE(Reserva Nacional Estratégica de Diésel<(350000*0.5), Venta de Diésel Totalizada\
+		*(0.25) , Venta de Diésel Totalizada )
+	~	
+	~		|
+
+Venta de Diésel Totalizada=
+	(RANDOM UNIFORM( 190 , 230 , 210 ))*1000
+	~	
+	~		|
+
+Venta de Gasolina=
+	IF THEN ELSE(Reserva Nacional Estratégica de Gasolina<(350000*0.5),Venta de Gasolina Totalizada\
+		*(0.25) , Venta de Gasolina Totalizada )
+	~	
+	~		|
+
+Venta de Gasolina Totalizada=
+	(RANDOM UNIFORM( 187 , 236 , 210 ))*1000
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 180
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 15
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,120,0
+10,1,Reserva Nacional Estratégica de Gasolina,57,384,61,38,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,354,366,30,30,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,100,0,0,22,0,192,0,-1--1--1,,1|(164,366)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(273,366)|
+11,5,0,216,366,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Venta de Gasolina,216,404,75,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,-226,363,30,30,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,7,100,0,0,22,0,192,0,-1--1--1,,1|(-151,363)|
+1,9,10,1,4,0,0,22,0,192,0,-1--1--1,,1|(-49,363)|
+11,10,0,-100,363,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Importación de Gasolina,-100,401,75,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,Reserva Nacional Estratégica de Diésel,44,27,55,34,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,13,48,330,15,30,30,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,12,100,0,0,22,0,192,0,-1--1--1,,1|(146,15)|
+1,15,16,13,4,0,0,22,0,192,0,-1--1--1,,1|(253,15)|
+11,16,0,200,15,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Venta de Diésel,200,53,75,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,18,48,-233,14,30,30,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,18,100,0,0,22,0,192,0,-1--1--1,,1|(-158,14)|
+1,20,21,12,4,0,0,22,0,192,0,-1--1--1,,1|(-56,14)|
+11,21,0,-107,14,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,22,Importación de Diésel,-107,52,75,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,Tasa de Importación de Galones de Diésel,-448,-205,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,Venta de Diésel Totalizada,322,87,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,Venta de Gasolina Totalizada,337,283,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,25,5,1,0,0,0,0,192,0,-1--1--1,,1|(242,303)|
+10,27,Importación por Puma Diésel,-67,-174,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,Importación por Delta Diésel,-199,-145,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,Importación de Texaco Diésel,-294,-67,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,24,17,1,0,0,0,0,192,0,-1--1--1,,1|(202,92)|
+1,31,27,21,1,0,0,0,0,192,0,-1--1--1,,1|(-62,-65)|
+1,32,28,21,1,0,0,0,0,192,0,-1--1--1,,1|(-145,-68)|
+1,33,29,21,1,0,0,0,0,192,0,-1--1--1,,1|(-192,-12)|
+1,34,23,29,1,0,0,0,0,192,0,-1--1--1,,1|(-340,-136)|
+1,35,23,28,1,0,0,0,0,192,0,-1--1--1,,1|(-273,-179)|
+1,36,23,27,1,0,0,0,0,192,0,-1--1--1,,1|(-239,-212)|
+10,37,Importación por Delta Gasolina,-159,534,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,Importación por Texaco Gasolina,-267,470,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,Importación por Puma Gasolina,-32,560,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,40,Tasa de Importación de Galones de Gasolinas,-388,619,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,38,11,1,0,0,0,0,192,0,-1--1--1,,1|(-196,458)|
+1,42,37,11,1,0,0,0,0,192,0,-1--1--1,,1|(-118,477)|
+1,43,39,11,1,0,0,0,0,192,0,-1--1--1,,1|(-41,476)|
+1,44,40,38,1,0,0,0,0,192,0,-1--1--1,,1|(-349,506)|
+1,45,40,37,1,0,0,0,0,192,0,-1--1--1,,1|(-280,560)|
+1,46,40,39,1,0,0,0,0,192,0,-1--1--1,,1|(-205,616)|
+10,47,Precio de WTI,546,257,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,48,Impuesto de Gasolina,639,461,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,49,Impuesto de Diésel,620,10,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,50,12,16,1,0,0,0,0,192,0,-1--1--1,,1|(110,-59)|
+1,51,1,6,1,0,0,0,0,192,0,-1--1--1,,1|(134,463)|
+10,52,Isla Pencas,174,181,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,1,52,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,12,52,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,55,Bahía las Minas,21,178,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,56,12,55,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,1,55,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,58,Isla la Boca,-123,176,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,59,1,58,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,60,12,58,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,61,Costo Final de Diésel,799,173,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,62,Costo Final de Gasolina,789,343,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,63,49,61,1,0,0,0,0,192,0,-1--1--1,,1|(675,131)|
+1,64,47,61,1,0,0,0,0,192,0,-1--1--1,,1|(653,235)|
+1,65,48,62,1,0,0,0,0,192,0,-1--1--1,,1|(672,368)|
+1,66,47,62,1,0,0,0,0,192,0,-1--1--1,,1|(699,280)|
+10,67,Tasa de Especulación de Mercado,956,18,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,68,67,61,1,0,0,0,0,192,0,-1--1--1,,1|(953,146)|
+10,69,Tasa de Especulación de Mercado Gas,964,467,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,70,69,62,1,0,0,0,0,192,0,-1--1--1,,1|(924,347)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Bahía las Minas
+9:current
+19:120,0
+24:0
+25:180
+26:180
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Courier|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
