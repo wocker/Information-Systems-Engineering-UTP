@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>SpaceX</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="favicon/ico" href="img/favicon.ico"/>
+  </head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, nav {
+      background-color: #000000;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1, nav a {
+      color: #ffffff;
+      margin: 0;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav li {
+      margin: 0 10px;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .column {
+      flex-basis: 45%;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      padding-top: 25px;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .texto-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .footer-column {
+      flex-basis: 25%;
+    }
+
+    footer img, footer p {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav .visita {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+  </style>
+<body>
+  <header>
+    <a href="index.html"><img src="img/logo-spacex.png" alt="Logo SpaceX" class="logo" align="left"></a>
+    <nav>
+      <ul>
+        <li><a href="index.php">Inicio</a></li>
+        <li><a href="falcon-heavy.php">Falcon Heavy</a></li>
+        <li><a href="dragon.php">Dragon</a></li>
+        <li><a href="starship.php">Starship</a></li>
+        <li><a href="starlink.php">Starlink</a></li>
+        <li><a href="contactanos.php">Contáctanos</a></li>
+        <li><a href="../logout.php">Cerrar Sesión</a></li>
+        <li><span class="visita">Visita # <?php echo obtenerVisitas(); ?></span></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="main-container">
+      <div class="column image-container">
+        <img src="img/batch-starlink.jpg" alt="60 Satélites Starlink 1.0 apilados para entrar en la Cofia de un Falcon 9" class="image">
+      </div>
+      <div class="column texto-container">
+        <p>Starlink es un proyecto desarrollado por SpaceX, la empresa aeroespacial fundada por Elon Musk. La idea esencial detrás de Starlink es la de crear una constelación de satélites en órbita baja alrededor de la Tierra para proporcionar acceso a Internet de banda ancha, de alta velocidad y de baja latencia en todo el mundo.</p>
+        <p>A continuación, te dejo algunos detalles clave sobre Starlink:</p>
+        <ul>
+          <li><strong>1. Satélites de órbita terrestre baja (LEO):</strong> Los satélites de Starlink operan en la órbita terrestre baja, que es una región del espacio a unos 550 kilómetros de la superficie de la Tierra. A esta altitud, los satélites pueden cubrir un área específica de la Tierra con un retardo de latencia mucho menor en comparación con los satélites de comunicaciones tradicionales que operan en órbitas geoestacionarias a unos 36.000 kilómetros de altura. La órbita baja también permite velocidades de datos más rápidas.</li>
+          <li><strong>2. Constelación de satélites:</strong> Starlink planea tener miles de estos satélites en órbita, formando una constelación que puede proporcionar cobertura global. Los satélites están interconectados por enlaces láser, lo que permite transmitir datos de un satélite a otro, reduciendo así la necesidad de estaciones terrestres y minimizando la latencia.</li>
+          <li><strong>3. Enlaces de radiofrecuencia:</strong> Los satélites se comunican con las estaciones terrestres y los terminales de los usuarios en la Tierra utilizando radiofrecuencias. Starlink utiliza bandas de frecuencia Ku y Ka, que son ampliamente utilizadas para las comunicaciones por satélite.</li>
+          <li><strong>4. Terminal del usuario:</strong> Los usuarios de Starlink tienen una terminal que consta de una pequeña antena parabólica (a menudo llamada "Dishy McFlatface" por SpaceX) y un módem. La antena, que es motorizada y capaz de orientarse automáticamente hacia el satélite más cercano, recibe las señales de los satélites y las envía al módem para proporcionar acceso a Internet.</li>
+          <li><strong>5. Mitigación de la contaminación luminosa y los desechos espaciales: </strong> SpaceX ha estado trabajando para minimizar el impacto de sus satélites en la observación astronómica y en el ambiente espacial. Los diseños revisados incluyen "VisorSat", una medida para reducir la reflectividad de los satélites, y un sistema de propulsión para retirar los satélites fuera de servicio de la órbita para reducir la acumulación de desechos espaciales.</li>
+        </ul>    
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-column">
+      <img src="img/logo-spacex.png" alt="Logo SpaceX" class="logo">
+      <p class="rights">© 2002-2023 SpaceX. Todos los derechos reservados.</p>
+    </div>
+    <div class="footer-column">
+      <h3>¿Quiénes Somos?</h3>
+      <p>SpaceX es una empresa aeroespacial que se dedica a la fabricación y lanzamiento de cohetes y naves espaciales. Nuestra misión es hacer que la humanidad sea una especie multiplanetaria explorando y colonizando Marte.</p>
+    </div>
+    <div class="footer-column">
+      <h3>Programas</h3>
+      <ul>
+        <li><a href="dragon.php">Dragon</a></li>
+        <li><a href="starlink.php">Starlink</a></li>
+        <li><a href="starship.php">Starship</a></li>
+      </ul>
+    </div>
+  </footer>
+  <?php
+  function obtenerVisitas() {
+    if (isset($_COOKIE['visitas'])) {
+      $visitas = $_COOKIE['visitas'];
+    } else {
+      $visitas = 0;
+    }
+
+    // Incrementar el valor de visitas en 1
+    $nuevasVisitas = $visitas + 1;
+
+    // Establecer la cookie con el nuevo valor de visitas
+    setcookie('visitas', $nuevasVisitas, time() + 86400); // Caduca después de 1 día (86400 segundos)
+
+    return $nuevasVisitas;
+  }
+  ?>
+</body>
+</html>
