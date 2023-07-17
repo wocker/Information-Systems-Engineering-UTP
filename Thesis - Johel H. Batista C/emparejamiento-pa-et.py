@@ -69,6 +69,7 @@ def process_data(students, tutors, preferences):
 def gale_shapley(tutor_list, student_list, tutor_pref, student_pref):
     """
     Esta función implementa el algoritmo de Gale-Shapley para emparejar tutores y estudiantes basándose en sus preferencias.
+    Devuelve una lista de los emparejamientos.
     """
     # Inicializamos la lista de tutores libres y el diccionario de emparejamientos
     free_tutors = tutor_list[:]
@@ -87,14 +88,12 @@ def gale_shapley(tutor_list, student_list, tutor_pref, student_pref):
         if not engaged_tutor:
             # Si el estudiante no está emparejado, lo emparejamos con el tutor
             engaged[student] = tutor
-            print("  %s y %s" % (tutor, student))
         else:
             # Si el estudiante ya está emparejado, verificamos si prefiere al nuevo tutor
             student_list = student_pref[student]
             if student_list.index(engaged_tutor) > student_list.index(tutor):
                 # Si el estudiante prefiere al nuevo tutor, rompemos el emparejamiento anterior y creamos el nuevo emparejamiento
                 engaged[student] = tutor
-                print("  %s dejó a %s por %s" % (student, engaged_tutor, tutor))
                 if tutor_pref[engaged_tutor]:
                     # Si el tutor rechazado todavía tiene estudiantes en su lista de preferencias, lo añadimos a la lista de tutores libres
                     free_tutors.append(engaged_tutor)
@@ -102,7 +101,9 @@ def gale_shapley(tutor_list, student_list, tutor_pref, student_pref):
                 # Si el estudiante prefiere a su tutor actual, el tutor rechazado propone al siguiente estudiante de su lista de preferencias
                 if tutor_list:
                     free_tutors.append(tutor)
-    return engaged
+    # Convertimos el diccionario de emparejamientos en una lista de emparejamientos
+    pairings = [(tutor, student) for student, tutor in engaged.items()]
+    return pairings
 
 # Recuperamos los datos de la base de datos
 students, tutors, preferences = get_data_from_db()
@@ -111,5 +112,9 @@ students, tutors, preferences = get_data_from_db()
 student_list, tutor_list, student_pref, tutor_pref = process_data(students, tutors, preferences)
 
 # Implementamos el algoritmo de Gale-Shapley para encontrar los emparejamientos
+pairings = gale_shapley(tutor_list, student_list, tutor_pref, student_pref)
+
+# Imprimimos la lista de emparejamientos
 print("\nEmparejamientos:")
-engaged = gale_shapley(tutor_list, student_list, tutor_pref, student_pref)
+for tutor, student in pairings:
+    print(f"  {tutor} y {student}")
